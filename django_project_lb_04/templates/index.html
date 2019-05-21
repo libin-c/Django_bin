@@ -1,0 +1,60 @@
+{% load myfilter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django 自带模板</title>
+</head>
+<body>
+
+{% comment %}
+    多行注释
+{% endcomment %}
+
+{#模板继承#}
+
+{#自定义过滤器#}
+
+<p>{{ score | myfilter }}</p>
+<hr>
+{#过滤器#}
+{#01 length 求 列表字典长度#}
+<p>data_list 的长度是：{{ data_list| length }}</p>
+{#02 default 默认值#}
+<p>name的默认值是：{{ data_dict.name| default:'小可爱' }}</p>
+{#03 safe 浏览器解析标签#}
+<p>浏览器不解析标签的样子：{{ safe_data }}</p>
+<p>safe 模式下的样子{{ safe_data | safe }}</p>
+{#04 date 日期格式化#}
+<hr>
+{#date 过滤器要和 datetime 模块吓的datetime.now() 一起使用#}
+<p>{{ date|date:"Y年m月j日  H时i分s秒" }}</p>
+<hr>
+{#注意：运算符左右两侧不能紧挨变量或常量，必须有空格。#}
+{% if data_dict.age < 18 %}
+    <p>小可爱 你还没有成年</p>
+{% elif data_dict.age == 18 %}
+    <p>正正好！</p>
+{% else %}
+    <p>您已经长大了！</p>
+{% endif %}
+
+<hr>
+{#for 循环#}
+{#有开始就要有结束#}{#django自带模板取下标使用counter  从0 开始counter0 反向取下标revcounter#}
+<p>{% for temp in data_list %}</p>
+
+    {{ forloop.counter0}}---->{{ temp }}
+{#    empty 是方法 所以用{%  %} 列表为空或不存在时执行此逻辑#}
+    {% empty %}
+    <p> data_list 没有数据哦</p>
+<p>{% endfor %}</p>
+<hr>
+{#django 自带模板使用.方法取值 django自带模板不支持[]取值#}
+<p>{{ data_list.0 }}</p>
+<p>{{ data_dict.age }}</p>
+<hr>
+{#大胡子函数 同 Vue#}
+<p>{{ time }}</p>
+</body>
+</html>

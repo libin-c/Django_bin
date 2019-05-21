@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo_02</title>
+    <style>
+        p {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+{#    1.继承 父 文件 #}
+{% extends 'demo_01.html' %}
+
+{#使用 父模板 #}
+{% block fatherTemplate %}
+{#    # 继承父模板的内容#}
+    {{ block.super }}
+    <h5>子模板的内容</h5>
+{% endblock fatherTemplate %}
+</body>
+</html>

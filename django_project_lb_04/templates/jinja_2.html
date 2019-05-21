@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JinJa2 模板的使用</title>
+</head>
+<body>
+
+{#{% comment %}#}
+{#    多行注释#}
+{#{% endcomment %}#}
+
+{#模板继承#}
+
+{#自定义过滤器#}
+{##}
+
+{{ score | do_listreverse }}
+{{ score | add }}
+{#<hr>#}
+{#过滤器#}
+{#01 length 求 列表字典长度#}
+<p>data_list 的长度是：{{ data_list| length }}</p>
+{#02 default 默认值#}
+<p>name的默认值是：{{ data_dict.name| default:'小可爱' }}</p>
+{#03 safe 浏览器解析标签#}
+<p>浏览器不解析标签的样子：{{ safe_data }}</p>
+<p>safe 模式下的样子{{ safe_data | safe }}</p>
+{#04 date 日期格式化#}
+{{ date | date }}
+<hr>
+
+<hr>
+{#注意：运算符左右两侧不能紧挨变量或常量，必须有空格。#}
+{% if data_dict.age < 18 %}
+    <p>小可爱 你还没有成年</p>
+{% elif data_dict.age == 18 %}
+    <p>正正好！</p>
+{% else %}
+    <p>您已经长大了！</p>
+{% endif %}
+
+<hr>
+{#for 循环#}
+{#有开始就要有结束{#jiaja2模板取下标使用index  从0 开始index0 反向取下标revindex#}
+<p>{% for temp in data_list %}</p>
+
+    {{ loop.index0 }}---->{{ temp }}
+    {{ loop.cycle(cycle,ccc) }}----->{{ temp }}
+
+<p>{% endfor %}</p>
+<hr>
+{#jinja2也可以使用.方法取值 jinja2支持[]取值#}
+<p>{{ data_list.0 }}</p>
+<p>{{ data_list[1] }}</p>
+<p>{{ data_dict.age }}</p>
+<p>{{ data_dict['name'] }}</p>
+<hr>
+{#大胡子函数 同 Vue#}
+<p>{{ time }}</p>
+</body>
+</html>
